@@ -406,13 +406,13 @@ var resizePizzas = function(size) {
   function changeSliderLabel(size) {
     switch(size) {
       case "1":
-        document.querySelector("#pizzaSize").innerHTML = "Small";
+        document.getElementById("pizzaSize").innerHTML = "Small";
         return;
       case "2":
-        document.querySelector("#pizzaSize").innerHTML = "Medium";
+        document.getElementById("pizzaSize").innerHTML = "Medium";
         return;
       case "3":
-        document.querySelector("#pizzaSize").innerHTML = "Large";
+        document.getElementById("pizzaSize").innerHTML = "Large";
         return;
       default:
         console.log("bug in changeSliderLabel");
@@ -440,7 +440,7 @@ var resizePizzas = function(size) {
   // Optimization: pulled sizeSwitcher() function outside of loop
   function determineDx (elem, size) {
     var oldwidth = elem.offsetWidth;
-    var windowwidth = document.querySelector("#randomPizzas").offsetWidth;
+    var windowwidth = document.getElementById("randomPizzas").offsetWidth;
     var oldsize = oldwidth / windowwidth;
     var newsize = sizeSwitcher(size);
     var dx = (newsize - oldsize) * windowwidth;
@@ -452,7 +452,7 @@ var resizePizzas = function(size) {
   // Optimization 2: moved dx and newwidth outside the for loop, no recalculation needed
   // (value stays the same for all iterations)
   function changePizzaSizes(size) {
-    var pizzaList = document.querySelectorAll(".randomPizzaContainer");
+    var pizzaList = document.getElementsByClassName("randomPizzaContainer");
     var dx = determineDx(pizzaList[0], size);
     var newwidth = (pizzaList[0].offsetWidth + dx) + 'px';
     for (var i = 0; i < pizzaList.length; i++) {
@@ -508,7 +508,7 @@ function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
 
-  var items = document.querySelectorAll('.mover');
+  var items = document.getElementsByClassName('mover');
   var scrTop = document.body.scrollTop / 1250;
   for (var i = 0; i < items.length; i++) {
     var phase = Math.sin(scrTop + (i % 5));
@@ -532,15 +532,16 @@ window.addEventListener('scroll', updatePositions);
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
-  for (var i = 0; i < 200; i++) {
-    var elem = document.createElement('img');
-    elem.className = 'mover';
-    elem.src = "images/pizza.png";
-    elem.style.height = "100px";
-    elem.style.width = "73.333px";
-    elem.basicLeft = (i % cols) * s;
-    elem.style.top = (Math.floor(i / cols) * s) + 'px';
-    document.querySelector("#movingPizzas1").appendChild(elem);
-  }
-  updatePositions();
+  // Show 25% of the +-110 flavors pizzas
+ for (var i = 0; i < 28; i++) {
+   var elem = document.createElement('img');
+   elem.className = 'mover';
+   elem.src = "images/pizza.png";
+   elem.style.height = "100px";
+   elem.style.width = "73.333px";
+   elem.basicLeft = (i % cols) * s;
+   elem.style.top = (Math.floor(i / cols) * s) + 'px';
+   document.querySelector("#movingPizzas1").appendChild(elem);
+ }
+ updatePositions();
 });
