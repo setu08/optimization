@@ -532,7 +532,7 @@ window.addEventListener('scroll', updatePositions);
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
-  // Show 25% of the +-110 flavors pizzas
+  // will show  25% of the +-110 pizzas
  for (var i = 0; i < 28; i++) {
    var elem = document.createElement('img');
    elem.className = 'mover';
